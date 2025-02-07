@@ -4,19 +4,24 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host ",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.3",
+    "clsx": "^2.1.1",
     "framer-motion": "^12.3.1",
+    "motion": "^12.4.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.1.5",
+    "react-scroll-parallax": "^3.4.5",
     "react-slot-counter": "^3.1.0",
     "react-type-animation": "^3.2.0",
+    "swiper": "^11.2.2",
+    "tailwind-merge": "^3.0.1",
     "tailwindcss": "^4.0.3"
   },
   "devDependencies": {

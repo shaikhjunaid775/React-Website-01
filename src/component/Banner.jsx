@@ -1,11 +1,16 @@
 import { useRef, useState } from "react";
+import { useContext } from "react";
 import { TypeAnimation } from "react-type-animation";
+import { ThemeContext } from "../context/ThemeContext";
+import { motion } from "framer-motion";
+import { LampContainer } from "../ui/lamp";
 
 function Banner() {
   const [isFocused, setIsFocused] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [opacity, setOpacity] = useState(0);
   const divRef = useRef();
+  const { isDarkMode } = useContext(ThemeContext);
 
   const handleMouseMove = (e) => {
     if (!divRef.current || isFocused) return;
@@ -42,17 +47,23 @@ function Banner() {
         onBlur={handleBlur}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="relative isolate overflow-hidden bg-gray-900 "
+        className=" relative isolate overflow-hidden dark:bg-gray-900 bg-gray-200 "
       >
         <div
-        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
-        style={{
-          opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(255, 255, 255, 0.17), transparent 20%)`,
-        }}
-      />
+          className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
+          style={{
+            opacity,
+            background: `radial-gradient(600px circle at ${position.x}px ${
+              position.y
+            }px, ${
+              isDarkMode === "light"
+                ? "rgba(0, 0, 0, 0.13)"
+                : "rgba(255, 255, 255, 0.17)"
+            }, transparent 20%)`
+          }}
+        />
         <svg
-          className="absolute inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+          className="hidden dark:block absolute inset-0 -z-10 h-full w-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
           aria-hidden="true"
         >
           <defs>
@@ -95,7 +106,7 @@ function Banner() {
 
         <div className="mt-[-50px] flex h-screen items-center justify-center">
           <div className="max-w-full flex-shrink-0 px-4 text-center lg:mx-0 lg:max-w-3xl lg:pt-8">
-            <h1 className="mt-10 text-5xl font-bold tracking-tight text-white sm:text-6xl">
+            <h1 className="mt-10 text-5xl font-bold tracking-tight dark:text-white text-black sm:text-6xl">
               Modernize your
               <span className="text-sky-500">
                 {" "}
@@ -111,13 +122,16 @@ function Banner() {
                 />
               </span>
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-300">
-            Ripple is the leading provider of digital asset infrastructure for financial services. Send cross-border payments in real-time, engage with tokenization and digital assets, and meet regulatory compliance requirements—all in one place.
+            <p className="mt-6 text-lg leading-8 dark:text-gray-300 ">
+              Ripple is the leading provider of digital asset infrastructure for
+              financial services. Send cross-border payments in real-time,
+              engage with tokenization and digital assets, and meet regulatory
+              compliance requirements—all in one place.
             </p>
             <div className="mt-5 flex items-center justify-center gap-x-6">
               <a
                 href="/register"
-                className="rounded-md bg-sky-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-sky-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400"
+                className="rounded-full bg-sky-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-sky-400 ="
                 rel="noreferrer"
               >
                 Try Now →
@@ -126,6 +140,20 @@ function Banner() {
           </div>
         </div>
       </div>
+      <LampContainer>
+        <motion.h1
+          initial={{ opacity: 0.5, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut"
+          }}
+          className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+        >
+          Build lamps <br /> the right way
+        </motion.h1>
+      </LampContainer>
     </>
   );
 }

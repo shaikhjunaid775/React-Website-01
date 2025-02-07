@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { ThemeContext } from "../context/ThemeContext";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
+  const { isDarkMode, toggleTheme } = useContext(ThemeContext);
+  
 
   const menuItems = [
     {
@@ -38,40 +42,31 @@ function Header() {
 
   return (
     <div>
-      <div className="bg-black/30">
+      <div className="bg-sky-500/30">
         <div>
-          <div className="flex justify-center items-center ">
-            <div className="relative z-10 flex-col px-4  text-center md:py-1 md:flex-row md:justify-center md:items-center  lg:mx-auto  flex mx-4">
+          <div className="flex justify-center items-center py-2">
+            <div className="relative z-10 flex-col px-4  text-center md:py-1 md:flex-row md:justify-center md:items-center    flex mx-4">
               <p className="mb-2 mr-0 md:mb-0 md:text-left  md:mr-4">
                 Don’t fall victim to crypto scams
               </p>
               <div className="md:flex-shrink-0">
                 <a>
                   <button
-                    className=" py-1 pl-3 pr-2 rounded-4xl border-blue-50 border-solid  border-[1.5px] text-gray-2.5 "
+                    className=" py-1 pl-3 pr-2 rounded-4xl  bg-[#101828] hover:bg-sky-400  text-gray-200 "
                     type="button"
                   >
-                    <div className="wrapper">
-                      <span className="relative z-[9] inline-block">
+                    <div className="wrapper text-center ">
+                      <span className="relative z-[9] flex items-center gap-2 ">
                         Read the Guide
                         <svg
-                          className="inline-block hover-arrow"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          fill="none"
                           xmlns="http://www.w3.org/2000/svg"
+                          className="size-5"
+                          viewBox="0 0 12 24"
                         >
                           <path
-                            d="M12.9999 8.26758L3.99989 8.26758"
-                            className="hover-arrow-line-path"
-                            strokeWidth="1.5"
-                          ></path>
-                          <path
-                            d="M7 4L11.2426 8.24264L7 12.4853"
-                            className="hover-arrow-tip-path"
-                            strokeWidth="2"
-                            strokeLinejoin="round"
+                            fill="currentColor"
+                            fillRule="evenodd"
+                            d="M10.157 12.711L4.5 18.368l-1.414-1.414l4.95-4.95l-4.95-4.95L4.5 5.64l5.657 5.657a1 1 0 0 1 0 1.414"
                           ></path>
                         </svg>
                       </span>
@@ -83,7 +78,7 @@ function Header() {
           </div>
         </div>
       </div>
-      <header className="bg-black">
+      <header className="dark:bg-black bg-white">
         <nav
           className="mx-auto flex max-w-7xl items-center justify-between p-3 lg:px-8 relative"
           aria-label="Global"
@@ -99,6 +94,31 @@ function Header() {
             </a>
           </div>
           <div className="flex lg:hidden">
+            <label className="relative inline-flex items-center cursor-pointer">
+              <button
+                onClick={toggleTheme} 
+                className="h-12 w-12 rounded-lg p-2 "
+              >
+                <svg
+                  className="fill-violet-700 block dark:hidden"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+                <svg
+                  className="fill-yellow-500 hidden dark:block"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+              </button>
+            </label>
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -107,7 +127,7 @@ function Header() {
               {isMenuOpen ? (
                 <>
                   <svg
-                    className=" w-6 h-6 fill-white/90"
+                    className=" w-6 h-6 dark:fill-white/90 fill-black/90"
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -120,7 +140,7 @@ function Header() {
                 </>
               ) : (
                 <svg
-                  className="w-6 h-6 stroke-white/90"
+                  className="w-6 h-6 dark:stroke-white/90 stroke-black/90"
                   fill="none"
                   strokeWidth="2"
                   viewBox="0 0 24 24"
@@ -142,7 +162,7 @@ function Header() {
                   onClick={() =>
                     setOpenDropdown(openDropdown === index ? null : index)
                   }
-                  className="flex items-center gap-x-1 text-sm font-semibold text-white  cursor-pointer"
+                  className="flex items-center gap-x-1 text-sm font-semibold dark:text-white text-black cursor-pointer"
                 >
                   {menu.title}
                   {openDropdown === index ? (
@@ -182,7 +202,7 @@ function Header() {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.3 }}
-                      className="absolute top-full -left-8 z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white ring-1 shadow-lg ring-gray-900/5"
+                      className="absolute top-full -left-8 z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl dark:bg-black bg-white ring-1 shadow-lg ring-gray-900/5 dark:ring-gray-200/10"
                     >
                       <div className="p-2 px-0">
                         {menu.submenus.map((submenu, subIndex) => (
@@ -214,9 +234,7 @@ function Header() {
                               </svg>
                             </div>
                             <div className="text-start">
-                              <span
-                                className="block font-semibold text-gray-900 cursor-pointer"
-                              >
+                              <span className="block font-semibold text-gray-900 dark:text-gray-200 cursor-pointer">
                                 {submenu.name}
                                 <span className="absolute inset-0"></span>
                               </span>
@@ -234,6 +252,29 @@ function Header() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <button
+                onClick={toggleTheme} 
+                className="h-12 w-12 rounded-lg p-2 "
+              >
+                <svg
+                  className="fill-violet-700 block dark:hidden"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+                <svg
+                  className="fill-yellow-500 hidden dark:block"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+              </button>
             <button className="group/button relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gray-800 px-6 py-1 text-base font-semibold text-white transition-all duration-300 ease-in-out hover:scale-100 border border-white/20  cursor-pointer">
               <span className="text-lg">Login</span>
               <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-13deg)_translateX(-100%)] group-hover/button:duration-1000 group-hover/button:[transform:skew(-13deg)_translateX(100%)]">
@@ -244,7 +285,7 @@ function Header() {
 
           {isMenuOpen && (
             <div
-              className={` lg:hidden absolute w-full top-17 right-0 z-100 w-full overflow-y-auto bg-black text-white px-6 pb-8  sm:ring-1 sm:ring-gray-900/10`}
+              className={` lg:hidden absolute w-full top-17 right-0 z-100  overflow-y-auto dark:bg-black bg-white ring-1 shadow-lg ring-gray-900/5 dark:ring-gray-200/10 text-black dark:text-white px-6 pb-8  sm:ring-1 sm:ring-gray-900/10`}
             >
               <div className="flex items-center justify-between"></div>
               {/* Mobile Menu */}
@@ -319,7 +360,7 @@ function Header() {
                                   <a className="block rounded-lg py-2 pr-3 pl-6 text-sm/7 font-semibold ">
                                     {submenu.name}
                                   </a>
-                                  <p className="mt-1 text-gray-600">
+                                  <p className="mt-1 text-gray-600 dark:text-gray-400">
                                     {submenu.description}
                                   </p>
                                 </motion.div>

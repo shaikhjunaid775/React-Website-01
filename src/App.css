@@ -1,5 +1,12 @@
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
   text-align: center;
 }
+
+
+.swiper-pagination{
+  z-index: 100 !important;
+}
+
+

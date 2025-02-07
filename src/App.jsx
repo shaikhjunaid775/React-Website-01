@@ -1,14 +1,14 @@
 import "./App.css";
-import Banner from "./component/Banner";
-import Header from "./component/Header";
-import AnimatedCounters from "./component/AnimatedCounters";
+import ThemeProvider from "./context/ThemeContext";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <>
-      <Header />
-      <Banner />
-      <AnimatedCounters />
+      <ThemeProvider>
+      
+        <Home />
+      </ThemeProvider>
     </>
   );
 }
