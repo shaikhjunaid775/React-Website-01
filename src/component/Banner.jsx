@@ -2,8 +2,7 @@ import { useRef, useState } from "react";
 import { useContext } from "react";
 import { TypeAnimation } from "react-type-animation";
 import { ThemeContext } from "../context/ThemeContext";
-import { motion } from "framer-motion";
-import { LampContainer } from "../ui/lamp";
+import SplitText from "../reactbits/SplitText/SplitText";
 
 function Banner() {
   const [isFocused, setIsFocused] = useState(false);
@@ -106,6 +105,17 @@ function Banner() {
 
         <div className="mt-[-50px] flex h-screen items-center justify-center">
           <div className="max-w-full flex-shrink-0 px-4 text-center lg:mx-0 lg:max-w-3xl lg:pt-8">
+            <SplitText
+              text="Hello, User!"
+              className="mt-10 text-5xl font-bold tracking-tight dark:text-white text-black sm:text-6xl"
+              delay={150}
+              animationFrom={{ opacity: 0, transform: "translate3d(0,50px,0)" }}
+              animationTo={{ opacity: 1, transform: "translate3d(0,0,0)" }}
+              easing="easeOutCubic"
+              threshold={0.2}
+              rootMargin="-50px"
+              // onLetterAnimationComplete={handleAnimationComplete}
+            />
             <h1 className="mt-10 text-5xl font-bold tracking-tight dark:text-white text-black sm:text-6xl">
               Modernize your
               <span className="text-sky-500">
@@ -140,20 +150,6 @@ function Banner() {
           </div>
         </div>
       </div>
-      <LampContainer>
-        <motion.h1
-          initial={{ opacity: 0.5, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: "easeInOut"
-          }}
-          className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
-        >
-          Build lamps <br /> the right way
-        </motion.h1>
-      </LampContainer>
     </>
   );
 }
